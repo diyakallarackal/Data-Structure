@@ -1,105 +1,128 @@
-#include <stdio.h>
+#include <stdio.h>    
 int main() {
-int r, c,i, j;
-printf("Enter number of rows and columns: ");
-scanf("%d %d", &r, &c);
-int mat1[10][10], mat2[10][10];
-printf("Enter elements of Matrix 1:\n");
-    for(i = 0; i < r; i++)
-        for(j = 0; j < c; j++)
-            scanf("%d", &mat1[i][j]);
-printf("Enter elements of Matrix 2:\n");
-    for(i = 0; i < r; i++)
-        for(j = 0; j < c; j++)
-            scanf("%d", &mat2[i][j]);
-int sparse1[3][100], n1 = 0;
-    for(i = 0; i < r; i++)
-        for(j = 0; j < c; j++)
-            if(mat1[i][j] != 0) {
-                sparse1[0][n1] = i;
-                sparse1[1][n1] = j;
-                sparse1[2][n1] = mat1[i][j];
-                n1++;
-            }
- int sparse2[3][100], n2 = 0;
-    for(i = 0; i < r; i++)
-        for(j = 0; j < c; j++)
-            if(mat2[i][j] != 0) {
-                sparse2[0][n2] = i;
-                sparse2[1][n2] = j;
-                sparse2[2][n2] = mat2[i][j];
-                n2++;
-            }
-printf("\nSparse Matrix 1 (row column value):\n");
-    for(i = 0; i < n1; i++)
-        printf("%d %d %d\n", sparse1[0][i], sparse1[1][i], sparse1[2][i]);
-    printf("\nSparse Matrix 2 (row column value):\n");
-    for(i = 0; i < n2; i++)
-        printf("%d %d %d\n", sparse2[0][i], sparse2[1][i], sparse2[2][i]);
-    int res[3][200];
-    int i1 = 0, i2 = 0, k = 0;
-    while(i1 < n1 && i2 < n2) {
-        int r1 = sparse1[0][i1], c1 = sparse1[1][i1];
-        int r2 = sparse2[0][i2], c2 = sparse2[1][i2];
-        if (r1 < r2 || (r1 == r2 && c1 < c2)) {
-            res[0][k] = r1;
-            res[1][k] = c1;
-            res[2][k] = sparse1[2][i1];
-            i1++; k++;
-        } else if (r2 < r1 || (r1 == r2 && c2 < c1)) {
-            res[0][k] = r2;
-            res[1][k] = c2;
-            res[2][k] = sparse2[2][i2];
-            i2++; k++;
-        } else {
-            int sum = sparse1[2][i1] + sparse2[2][i2];
-            if(sum != 0) {
-                res[0][k] = r1;
-                res[1][k] = c1;
-                res[2][k] = sum;
+    int i, j, k = 1, m, n;
+    int a[10][10], b[10][3];       
+    printf("Enter the number of rows and columns\n");
+    scanf("%d%d", &m, &n);                                         
+    printf("Enter the Elements:\n");
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < n; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < n; j++) {
+            if (a[i][j] != 0) {
+                b[k][0] = i;        
+                b[k][1] = j;        
+                b[k][2] = a[i][j];  
                 k++;
             }
-            i1++; i2++;
         }
     }
-
-    while(i1 < n1) {
-        res[0][k] = sparse1[0][i1];
-        res[1][k] = sparse1[1][i1];
-        res[2][k] = sparse1[2][i1];
-        i1++; k++;
+    b[0][0] = m;        
+    b[0][1] = n;         
+    b[0][2] = k - 1;
+    printf("Sparse matrix representation Of First Matrix:\n");
+    printf("Row\tCol\tValue\n");
+    for (i = 0; i < k; i++)
+    {
+    for(j=0;j<3;j++)
+     {
+        printf("%d\t", b[i][j]);
+        
     }
-
-    while(i2 < n2) {
-        res[0][k] = sparse2[0][i2];
-        res[1][k] = sparse2[1][i2];
-        res[2][k] = sparse2[2][i2];
-        i2++; k++;
+    printf("\n");
     }
-
-    printf("\nSum of Sparse Matrices (row column value):\n");
-    for(i = 0; i < k; i++)
-        printf("%d %d %d\n", res[0][i], res[1][i], res[2][i]);
-    int trans[3][200];
-    for(i = 0; i < k; i++) {
-        trans[0][i] = res[1][i]; 
-        trans[1][i] = res[0][i]; 
-        trans[2][i] = res[2][i]; 
+     int x[10][10], c[10][3], p = 1, r, s;
+    printf("Enter the number of rows and columns for second matrix\n");
+    scanf("%d%d", &r, &s);
+    printf("Enter the Elements of second matrix:\n");
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < s; j++) {
+            scanf("%d", &x[i][j]);
+        }
     }
-    for(i = 0; i < k - 1; i++) {
-        for(j = i + 1; j < k; j++) {
-            if(trans[0][i] > trans[0][j] ||
-               (trans[0][i] == trans[0][j] && trans[1][i] > trans[1][j])) {
-                int temp;
-                temp = trans[0][i]; trans[0][i] = trans[0][j]; trans[0][j] = temp;
-                temp = trans[1][i]; trans[1][i] = trans[1][j]; trans[1][j] = temp;
-                temp = trans[2][i]; trans[2][i] = trans[2][j]; trans[2][j] = temp;
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < s; j++) {
+            if (x[i][j] != 0) {
+                c[p][0] = i;
+                c[p][1] = j;
+                c[p][2] = x[i][j];
+                p++;
             }
         }
     }
+    c[0][0] = r;
+    c[0][1] = s;
+    c[0][2] = p - 1;
+    printf("Resulting Sparse Matrix for second matrix:\n");
+    printf("Row\tCol\tValue\n");
+    for (i = 0; i < p; i++) {
+        for (j = 0; j < 3; j++) {
+            printf("%d\t", c[i][j]);
+        }
+        printf("\n");
+    }
+      if (b[0][0] != c[0][0] || b[0][1] != c[0][1]) {
+        printf("Matrix dimensions do not match, cannot add.\n");
+        return 0;
+    }
 
-    printf("\nTranspose of Sum :\n");
-    for(i = 0; i < k; i++)
-        printf("%d %d %d\n", trans[0][i], trans[1][i], trans[2][i]);
+    int d[20][3];
+    i = 1; j = 1; k = 1;
+    d[0][0] = b[0][0];
+    d[0][1] = b[0][1];
+
+    while (i <= b[0][2] && j <= c[0][2]) {
+        if (b[i][0] < c[j][0] || (b[i][0] == c[j][0] && b[i][1] < c[j][1])) {
+            d[k][0] = b[i][0];
+            d[k][1] = b[i][1];
+            d[k][2] = b[i][2];
+            i++; k++;
+        } else if (b[i][0] > c[j][0] || (b[i][0] == c[j][0] && b[i][1] > c[j][1])) {
+            d[k][0] = c[j][0];
+            d[k][1] = c[j][1];
+            d[k][2] = c[j][2];
+            j++; k++;
+        } else {
+            int sum = b[i][2] + c[j][2];
+            if (sum != 0) {
+                d[k][0] = b[i][0];
+                d[k][1] = b[i][1];
+                d[k][2] = sum;
+                k++;
+            }
+            i++; j++;
+        }
+    }
+    while (i <= b[0][2]) {
+        d[k][0] = b[i][0];
+        d[k][1] = b[i][1];
+        d[k][2] = b[i][2];
+        i++; k++;
+    }
+    while (j <= c[0][2]) {
+        d[k][0] = c[j][0];
+        d[k][1] = c[j][1];
+        d[k][2] = c[j][2];
+        j++; k++;
+    }
+    d[0][2] = k - 1;
+    printf("Resulting Sparse Matrix after addition:\n");
+    printf("Row\tCol\tValue\n");
+    for (i = 0; i < k; i++) {
+        for (j = 0; j < 3; j++) {
+            printf("%d\t", d[i][j]);
+        }
+        printf("\n");
+    }
+    printf("Resulting Transpose Sparse Matrix after addition:\n");
+    for (j = 0; j < 3; j++) {
+        for (i = 0; i < k; i++) {
+            printf("%d\t", d[i][j]);
+        }
+        printf("\n");
+    }
     return 0;
 }
