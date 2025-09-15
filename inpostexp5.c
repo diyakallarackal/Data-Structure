@@ -6,10 +6,8 @@ int main() {
     int top = -1, k = 0;
     char ch;
     int i;
-
     printf("Enter Infix Expression: ");
     scanf("%s", infix);
-
     for (i = 0; i < strlen(infix); i++) {
         ch = infix[i];
         if ((ch >= 'a' && ch <= 'z') || 
@@ -32,14 +30,12 @@ int main() {
             else if (ch == '*' || ch == '/') prec = 2;
             else if (ch == '+' || ch == '-') prec = 1;
             else prec = 0;
-
             while (top != -1) {
                 int topPrec;
                 if (stack[top] == '^') topPrec = 3;
                 else if (stack[top] == '*' || stack[top] == '/') topPrec = 2;
                 else if (stack[top] == '+' || stack[top] == '-') topPrec = 1;
                 else topPrec = 0;
-
                 if (topPrec >= prec) {
                     postfix[k++] = stack[top--];
                 } else {
