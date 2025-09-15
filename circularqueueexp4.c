@@ -8,7 +8,6 @@ int isFull() {
 int isEmpty() {
     return (front == -1);
 }
-
 void enqueue(int value) {
     if (isFull()) {
         printf("Queue is full (Overflow)\n");
@@ -21,7 +20,6 @@ void enqueue(int value) {
     queue[rear] = value;
     printf("Enqueued: %d\n", value);
 }
-
 void dequeue() {
     if (isEmpty()) {
         printf("Queue is empty (Underflow)\n");
@@ -34,7 +32,6 @@ void dequeue() {
         front = (front + 1) % MAX;
     }
 }
-
 void display() {
     if (isEmpty()) {
         printf("Queue is empty.\n");
@@ -50,7 +47,6 @@ void display() {
     }
     printf("\n");
 }
-
 int main() {
     int choice, value;
     while (1) {
@@ -58,7 +54,6 @@ int main() {
         printf("1. Enqueue\t 2.Dequeue\t3.Display\t 4.Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-
         if (choice == 1) {
             printf("Enter value to enqueue: ");
             scanf("%d", &value);
@@ -74,6 +69,5 @@ int main() {
             printf("Invalid choice. Try again.\n");
         }
     }
-
     return 0;
 }
