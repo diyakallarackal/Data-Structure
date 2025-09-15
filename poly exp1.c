@@ -13,15 +13,13 @@ int main() {
   printf("Enter the terms in descending order of exponents (coeff exp): \n");
   for(i = 0; i < m; i++) {
     printf("Term %d: ", i+1);
-    scanf("%d %d", &P1[i].coeff, &P1[i].exp);
-  }
+    scanf("%d %d", &P1[i].coeff, &P1[i].exp); }
   printf("\nEnter the number of terms in second polynomial: ");
   scanf("%d", &n);
   printf("Enter the terms in descending order of exponents (coeff exp): \n");
   for(i = 0; i < n; i++) {
     printf("Term %d: ", i+1);
-    scanf("%d %d", &P2[i].coeff, &P2[i].exp);
-  }
+    scanf("%d %d", &P2[i].coeff, &P2[i].exp); }
   i = 0; j = 0; k = 0;
   while(i < m && j < n) {
     if(P1[i].exp == P2[j].exp) {
@@ -33,8 +31,7 @@ int main() {
       i++; k++; }
     else {
       Result[k] = P2[j];
-      j++; k++; }
-  }
+      j++; k++; }}
   while(i < m) {
     Result[k] = P1[i];
     i++; k++;}
@@ -53,8 +50,7 @@ int main() {
     else if(Result[i].exp == 1)
       printf("%dx", Result[i].coeff);
     else 
-      printf("\n%dx^%d", Result[i].coeff, Result[i].exp);
-  }
-  printf("\n");
+      printf("\n%dx^%d", Result[i].coeff, Result[i].exp);}
+  printf("\n"); 
   return 0;
 }
