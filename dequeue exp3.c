@@ -1,24 +1,19 @@
 #include <stdio.h>
 #define MAX 5
-
 int queue[MAX];
 int front = -1;
 int rear = -1;
-
 void insertFront(int x);
 void insertRear(int x);
 void deleteFront();
 void deleteRear();
 void display();
-
 int main() {
     int n, choice = 0;
     printf("1: Insert Front, 2: Insert Rear, 3: Delete Front, 4: Delete Rear, 5: Display, 6: Exit\n");
-
     while (choice != 6) {
         printf("Enter your choice: ");
         scanf("%d", &choice);
-
         if (choice == 1) {
             printf("Enter the element to insert at front: ");
             scanf("%d", &n);
@@ -103,7 +98,6 @@ void deleteRear() {
         rear = rear - 1;
     }
 }
-
 void display() {
     if (front == -1) {
         printf("Deque is empty!\n");
