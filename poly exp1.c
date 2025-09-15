@@ -27,25 +27,20 @@ int main() {
     if(P1[i].exp == P2[j].exp) {
       Result[k].coeff = P1[i].coeff + P2[j].coeff;
       Result[k].exp = P1[i].exp;
-      i++; j++; k++;
-    }
+      i++; j++; k++; }
     else if(P1[i].exp > P2[j].exp) {
       Result[k] = P1[i];
-      i++; k++;
-    }
+      i++; k++; }
     else {
       Result[k] = P2[j];
-      j++; k++;
-    }
+      j++; k++; }
   }
   while(i < m) {
     Result[k] = P1[i];
-    i++; k++;
-  }
+    i++; k++;}
   while(j < n) {
     Result[k] = P2[j];
-    j++; k++;
-  }
+    j++; k++; }
   custom = k;
   printf("\nThe sum of first polynomial and second polynomial is \n");
   for(i = 0; i < custom; i++) {
