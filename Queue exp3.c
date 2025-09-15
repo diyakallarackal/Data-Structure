@@ -5,7 +5,6 @@ int main()
 	int queue[MAXSize];
 	int front = -1,rear = -1;
 	int choice, item, i;
-
     while (1) {
         printf("\nQueue Operations Menu:\n");
         printf("1. Enqueue \n");
@@ -14,7 +13,6 @@ int main()
         printf("4. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-
         if (choice == 1) {
            if (rear == MAXSize - 1) {
                 printf("Queue is full (Overflow).\n");
@@ -28,7 +26,6 @@ int main()
                 queue[rear] = item;
                 printf("%d inserted into queue.\n", item);
             }
-
         } else if (choice == 2) {
             if (front == -1 || front > rear) {
                 printf("Queue is empty (Underflow).\n");
@@ -39,7 +36,6 @@ int main()
                     front = rear = -1;
                 }
             }
-
         } else if (choice == 3) {
            
             if (front == -1 || front > rear) {
@@ -51,7 +47,6 @@ int main()
                 }
                 printf("\n");
             }
-
         } else if (choice == 4) {
             printf("Exiting program.\n");
             break;
@@ -59,6 +54,5 @@ int main()
             printf("Invalid choice. Please try again.\n");
         }
     }
-
     return 0;
 }
