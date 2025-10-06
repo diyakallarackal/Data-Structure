@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 struct Node {
     int data;
     struct Node* left;
@@ -42,11 +42,24 @@ void postorder(struct Node* root) {
         printf("%d ", root->data);
     }
 }
+int search(struct Node* root, int value) {
+    if (root == NULL) {
+        return 0; 
+    }
+    if (value == root->data) {
+        return 1; 
+    }
+    if (value < root->data) {
+        return search(root->left, value); 
+    } else {
+        return search(root->right, value); 
+    }
+}
 int main() {
     struct Node* root = NULL;
     int choice, value;
     do {
-        printf("\nMenu:\n1. Insert\n2. Inorder\n3. Preorder\n4. Postorder\n5. Exit\nEnter your choice: ");
+        printf("\nMenu:\n1. Insert\n2. Inorder\n3. Preorder\n4. Postorder\n5. Search\n6. Exit\nEnter your choice: ");
         scanf("%d", &choice);
         switch (choice) {
             case 1:
@@ -70,12 +83,21 @@ int main() {
                 printf("\n");
                 break;
             case 5:
-                printf("Exiting...");
+                printf("Enter value to search: ");
+                scanf("%d", &value);
+                if (search(root, value)) {
+                    printf("Value %d found in the tree.\n", value);
+                } else {
+                    printf("Value %d not found in the tree.\n", value);
+                }
+                break;
+            case 6:
+                printf("Exiting...\n");
                 break;
             default:
                 printf("Invalid choice!\n");
         }
         
-    } while (choice != 5);
+    } while (choice != 6);
     return 0;
-    }
+}
