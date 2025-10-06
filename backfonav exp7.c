@@ -57,7 +57,7 @@ int main() {
         switch(choice) {
             case 1:
                 printf("Enter URL to visit: ");
-                fgets(url,100,stdin);  // gets() is simple but unsafe; better use fgets() in practice
+                fgets(url,100,stdin);  
                 visitNewPage(url);
                 break;
             case 2:
